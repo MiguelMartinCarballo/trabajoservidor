@@ -17,7 +17,12 @@ class TreatmentFactory extends Factory
     public function definition()
     {
         return [
-            //
+
+            "Nombre" => $this->faker->firstName(),
+            "Descripcion" => $this->faker->word(),
+            "Precio" => $this->faker->randomFloat(2,2,40)
+        
+            
         ];
     }
 }

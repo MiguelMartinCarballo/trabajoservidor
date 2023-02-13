@@ -18,6 +18,7 @@ class AestheticFactory extends Factory
     {
         return [
             //
+            
         ];
     }
 }

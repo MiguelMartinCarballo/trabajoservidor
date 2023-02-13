@@ -9,10 +9,18 @@ class Center extends Model
 {
     use HasFactory;
 
+    protected $fillable=["Nombre","Direccion","CIF","Razon social"];
+
+
+
     public function hairSalon() {
-        return $this->hasMany(hairSalon::class);
+        return $this->hasMany(HairSalon::class);
     }
     public function aesthetic() {
-        return $this->hasMany(aesthetic::class);
+        return $this->hasMany(Aesthetic::class);
+    }
+
+    public function client() {
+        return $this->hasMany(Client::class);
     }
 }

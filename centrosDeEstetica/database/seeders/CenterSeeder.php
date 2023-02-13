@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Client;
+use App\Models\Center;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ClientSeeder extends Seeder
+class CenterSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,7 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        //
-
-        Client::factory()
+        Center::factory()
         ->count(10)
         ->create();
     }
