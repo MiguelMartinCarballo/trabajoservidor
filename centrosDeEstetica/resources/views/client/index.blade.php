@@ -23,6 +23,8 @@
                     <td>{{$cliente->apellidos}}</td>
                     <td>{{$cliente->direccion}}</td>
                     <td>{{$cliente->email}}</td>
+                    <td>{{$cliente->center_id}}</td>
+                    
                     <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary">Editar</a></td>
                     <td><a href="{{route('clientes.show',$cliente->id)}}"class="btn btn-primary">Ver</a></td>
 

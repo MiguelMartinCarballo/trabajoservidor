@@ -13,13 +13,6 @@ class Center extends Model
 
 
 
-    public function hairSalon() {
-        return $this->hasMany(HairSalon::class);
-    }
-    public function aesthetic() {
-        return $this->hasMany(Aesthetic::class);
-    }
-
     public function client() {
         return $this->hasMany(Client::class);
     }

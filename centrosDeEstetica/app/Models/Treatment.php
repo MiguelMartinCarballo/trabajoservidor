@@ -11,8 +11,8 @@ class Treatment extends Model
 
     use HasFactory;
 
-    public function client() {
-        return $this->hasMany(Client::class);
+    public function clients() {
+        return $this->belongsToMany(Client::class);
     }
 
 }

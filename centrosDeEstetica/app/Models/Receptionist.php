@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HairSalon extends Model
+class Receptionist extends Model
 {
     use HasFactory;
 
 
-    public function center() {
-        return $this->belongsTo(Center::class);
 
-        
+    public function admin() {
+        return $this->hasOne(HairSalon::class);
     }
 }

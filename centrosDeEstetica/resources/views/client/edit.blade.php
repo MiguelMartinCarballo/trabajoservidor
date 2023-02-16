@@ -28,6 +28,9 @@
                         <div class="my-3">
                         Email: <input  type="text"  name="email" value="{{ $cliente->email ?? '' }}" >
                         </div>
+                        <div class="my-3">
+                            numero de centro: <input  type="text"  name="center_id" value="{{ $cliente->center_id ?? '' }}" >
+                            </div>
                        
                         
                         

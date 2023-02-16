@@ -26,7 +26,13 @@
                         <div class="my-3">
                         Email: <input  type="text"  name="email"  >
                         </div>
-
+                        <div class="my-3">
+                            Numero de centro: <input  type="text"  name="center_id"  >
+                        </div>
+                        <div class="my-3">
+                                Numero de centro: <input  type="text"  name="treatment_id"  >
+                        </div>
+    
 
 
                 <button class="btn btn-primary" type="submit" value="actualizar">AÑADIR</button>

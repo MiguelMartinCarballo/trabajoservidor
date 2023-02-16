@@ -17,6 +17,7 @@
                     <td>{{$cliente->apellidos}}</td>
                     <td>{{$cliente->direccion}}</td>
                     <td>{{$cliente->email}}</td>
+                    <td>{{$cliente->center_id}}</td>
                     <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary">Editar</a></td>
                  
                     <td>
@@ -33,22 +34,22 @@
             <div>
                 <h2>TRATAMIENTOS QUE SE HA HECHO EL CLIENTE</h2>
 
-                @if(empty($cliente->orders[0]))
+                @if(empty($cliente->treatments[0]))
                 <br>
                 <p>No hay tramientos por parte de este cliente</p>
                 @else
                 <table class="table table-striped table-hover" border="1">
                     <tr>
-                        <td>SOLICITANTE</td>
-                            <td>FECHA</td>
+                        <td>TRATAMIENTO</td>
                             <td>DESCRIPCION</td>
+                            <td>PRECIO</td>
                     </tr>
-                @foreach($cliente->orders as $pedidos)
+                @foreach($cliente->treatments as $pedidos)
 
                <tr>
-                   <td>{{$pedidos->solicitante}}</td>
-                   <td>{{$pedidos->fecha}}</td>
-                   <td>{{$pedidos->descripcion}}</td>
+                   <td>{{$pedidos->Nombre}}</td>
+                   <td>{{$pedidos->Descripcion}}</td>
+                   <td>{{$pedidos->Precio}}</td>
             
                </tr>
                @endforeach

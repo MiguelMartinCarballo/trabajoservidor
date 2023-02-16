@@ -5,16 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
 use App\Models\Client;
-
+use App\Models\ClientTreatment;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
    
     public function index()
     {
@@ -38,7 +34,7 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
 
         $request->validate([
@@ -46,23 +42,40 @@ class ClientController extends Controller
             'nombre'=>'required',
             'apellidos'=>'required',
             'direccion'=>'required',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'center_id'=>'required'
             ],[
                 'nombre.required'=> 'Debes rellenar el nombre',
                 'nombre.max'=> 'El nombre no puede exceder de 100 caracteres',
                 'apellido.required'=>'Debes rellenar el apellido',
                 'direccion.required'=> 'Debes rellenar la direccion',
-                'email.required' => 'Debes rellenar el campo email'
+                'email.required' => 'Debes rellenar el campo email',
+                'center_id.required' => 'Debes rellenar el campo id del centro'
     
             ]);
-        // $p = new Client;
- 
-        // $p->nombre=$request->input("nombre");
-        // $p->descripcion=$request->input("descripcion");
-        // $p->precio=$request->input("precio");
+
+         $p = new Client;
+         
+   
+    
+        $p->nombre=$request->input("nombre");
+        $p->apellidos=$request->input("apellidos");
+        $p->direccion=$request->input("direccion");
+        $p->email=$request->input("email");
+        $p->center_id=$request->input("center_id");
+        $p->save();
+        $id=$p->id;
         // $p->save();//save es un metodo eloquent
   
-        Client::create($request->all());
+        $t= new ClientTreatment;
+
+        // $id = Client::select('id')->where('email', $p->email)->first();
+
+        $t->client_id=$id;
+        $t->treatment_id=$request->input("treatment_id");
+        
+        $t->save();
+  
 
         // $this->authorize("update",$client);
         return redirect()->action([ClientController::class, 'index'])->with('exito','Cliente añadido correctamente');
@@ -111,13 +124,15 @@ class ClientController extends Controller
             'nombre'=>'required',
             'apellidos'=>'required',
             'direccion'=>'required',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'center_id'=>'required'
             ],[
                 'nombre.required'=> 'Debes rellenar el nombre',
                 'nombre.max'=> 'El nombre no puede exceder de 100 caracteres',
                 'apellido.required'=>'Debes rellenar el apellido',
                 'direccion.required'=> 'Debes rellenar la direccion',
-                'email.required' => 'Debes rellenar el campo email'
+                'email.required' => 'Debes rellenar el campo email',
+                'center_id.required' => 'Debes rellenar el campo id del centro'
     
             ]);
 
@@ -128,6 +143,7 @@ class ClientController extends Controller
         $p->apellidos=$request->input("apellidos");
         $p->direccion=$request->input("direccion");
         $p->email=$request->input("email");
+        $p->center_id=$request->input("center_id");
         $p->save();//save es un metodo eloquent
       
         return redirect()->action([ClientController::class, 'index'])->with('exito','Cliente actualizado correctamente');
@@ -146,6 +162,6 @@ class ClientController extends Controller
         //
         $p= Client::find($id);
         $p->delete();
-        return redirect()->action([ClientController::class, 'index'])->with('exito','Cliento borrado correctamente');
+        return redirect()->action([ClientController::class, 'index'])->with('exito','Client borrado correctamente');
     }
 }

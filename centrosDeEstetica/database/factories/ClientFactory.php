@@ -21,7 +21,8 @@ class ClientFactory extends Factory
             "Nombre" => $this->faker->firstName(),
             "Apellidos" => $this->faker->lastName(),
             "Direccion"=>$this->faker->address(),
-            "email"=>$this->faker->email()
+            "email"=>$this->faker->email(),
+            "center_id"=>$this->faker->numberBetween(1,10)
         
         ];
     }

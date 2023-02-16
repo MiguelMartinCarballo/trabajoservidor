@@ -9,13 +9,15 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $fillable=["nombre","apellidos","direccion","email"];
+    protected $fillable=["nombre","apellidos","direccion","email","center_id"];
 
     public function center() {
-        return $this->hasMany(Center::class);
+        return $this->belongsTo(Center::class);
     }
-    public function treatment() {
-        return $this->hasMany(Treatment::class);
+    public function treatments() {
+        
+        return $this->belongsToMany(Treatment::class);
     }
+  
 
 }
