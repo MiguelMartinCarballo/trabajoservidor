@@ -9,7 +9,7 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $fillable=["Nombre","Apellido","Direccion"];
+    protected $fillable=["nombre","apellidos","direccion","email"];
 
     public function center() {
         return $this->hasMany(Center::class);
