@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreclientRequest;
 use App\Http\Requests\UpdateclientRequest;
+use App\Models\Center;
 use App\Models\Client;
 use App\Models\ClientTreatment;
+use App\Models\Treatment;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -15,17 +17,35 @@ class ClientController extends Controller
     public function index()
     {
         // $this->authorize('viewAny',Client::class);
+
+       
         $clienteList = Client::all();
         
         return view('client.index',['clienteList'=>$clienteList]);
     }
 
-    
+    public function session($admin){
+        session(['admin'=>$admin]);
+        return redirect()->action([ClientController::class, 'index'])->with('exito',"has accedido en calidad de $admin");
+
+    }
   
+
+    public function salir(){
+
+        session()->forget('admin');
+
+        return  redirect()->route('welcome');
+
+    }
     public function create()
+
+
     {
+        $tratamientoList = Treatment::all();
+        $centerList = Center::all();
         // $this->authorize("create",Client::class);
-        return view('client.create');
+        return view('client.create',['tratamientoList'=>$tratamientoList],['centerList'=>$centerList]);
     }
 
     /**
@@ -64,17 +84,22 @@ class ClientController extends Controller
         $p->email=$request->input("email");
         $p->center_id=$request->input("center_id");
         $p->save();
-        $id=$p->id;
+
+        if($request->input("treatment_id")!="ninguno"){
+            $id=$p->id;
+            $t= new ClientTreatment;
+            $t->client_id=$id;
+            $t->treatment_id=$request->input("treatment_id");
+            $t->save();
+        }
+       
         // $p->save();//save es un metodo eloquent
   
-        $t= new ClientTreatment;
+       
 
         // $id = Client::select('id')->where('email', $p->email)->first();
 
-        $t->client_id=$id;
-        $t->treatment_id=$request->input("treatment_id");
-        
-        $t->save();
+       
   
 
         // $this->authorize("update",$client);
@@ -93,6 +118,8 @@ class ClientController extends Controller
 
  
         $cliente= Client::find($id);
+
+        
        
         return view('client.show',['cliente'=>$cliente]);
     }
@@ -107,7 +134,10 @@ class ClientController extends Controller
     {
         $client= Client::find($id);
         // $this->authorize("update",$client);
-        return view('client.edit',['cliente'=>$client]);
+        $tratamientoList = Treatment::all();
+        $centerList = Center::all();
+        
+        return view('client.edit',['cliente'=>$client, 'tratamientoList'=>$tratamientoList,'centerList'=>$centerList]);
     }
 
     /**
@@ -146,6 +176,16 @@ class ClientController extends Controller
         $p->center_id=$request->input("center_id");
         $p->save();//save es un metodo eloquent
       
+        if($request->input("treatment_id")!="ninguno"){
+            $id=$p->id;
+            $t= new ClientTreatment;
+            $t->client_id=$id;
+            $t->treatment_id=$request->input("treatment_id");
+            $t->save();
+        }
+       
+        
+
         return redirect()->action([ClientController::class, 'index'])->with('exito','Cliente actualizado correctamente');
 
       

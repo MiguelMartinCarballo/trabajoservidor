@@ -13,12 +13,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/session/{admin}',[ClientController::class,'session'])->name('session');
+Route::get('/salir',[ClientController::class,'salir'])->name('salir');
+
 Route::resource('clientes',ClientController::class);
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('admin');
+})->name('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();

@@ -28,12 +28,29 @@
                         <div class="my-3">
                         Email: <input  type="text"  name="email" value="{{ $cliente->email ?? '' }}" >
                         </div>
-                        <div class="my-3">
-                            numero de centro: <input  type="text"  name="center_id" value="{{ $cliente->center_id ?? '' }}" >
-                            </div>
-                       
-                        
-                        
+
+                        <div class="mb-3">
+                            <label for="" class="form-label">Elige un Centro</label>
+                            <select  class="form-select form-select-lg" name="center_id" id="">
+                               
+                                @foreach($centerList as $center)
+                               
+                                <option value={{$center->id}}>{{$center->Nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                     
+                        <div class="mb-3">
+                            <label for="" class="form-label">Elige un tratamiento</label>
+                            <select  class="form-select form-select-lg" name="treatment_id" id="">
+                                <option value="ninguno" selected>Ninguno</option>
+                                @foreach($tratamientoList as $tratamiento)
+                               
+                                <option value={{$tratamiento->id}}>{{$tratamiento->Nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+    
 
                         <button class="btn btn-primary" type="submit" value="actualizar">ACTUALIZAR</button>
                    
