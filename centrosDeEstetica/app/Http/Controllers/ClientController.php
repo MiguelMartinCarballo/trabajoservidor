@@ -128,15 +128,24 @@ class ClientController extends Controller
     {
 
         if((session('admin'))){
+
         $cliente= Client::find($id);
 
-        $suma=$cliente->treatments->sum('Precio');
+        
 
-       
+        $suma=$cliente->treatments->sum('Precio');
+        
+        $centro=$cliente->center;
+         $tipo=$centro->aesthetic;
+         $tipo=$centro->hairsalon;
+
+        //dd($centro);
+        //dd($tipo);
+  
+
         // dd($cliente->center->hairsalon);
   
-       
-        return view('client.show',['cliente'=>$cliente, 'suma'=>$suma]);
+        return view('client.show',['cliente'=>$cliente, 'suma'=>$suma,'centro'=>$centro,'tipo'=>$tipo]);
         }else{
             return  redirect()->route('denied'); 
         }

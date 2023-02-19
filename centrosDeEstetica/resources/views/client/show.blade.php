@@ -9,10 +9,10 @@
             <br>
             <h2>CLIENTE {{$cliente->id}}</h2>
             <a href="{{route('clientes.create')}}">Nuevo cliente</a>
-            <p>{{$cliente->center->Nombre}} </p>
-            <p>{{$cliente->center->Direccion}} </p>
-            <p>{{$cliente->center->CIF}} </p>
-            <p>{{$cliente->center->hairsalon}} </p>
+            <p>{{$centro->Nombre}} </p>
+            <p>{{$centro->Direccion}} </p>
+            <p>{{$centro->CIF}} </p>
+            <p>{{$tipo}} </p>
             <table class="table table-striped table-hover" border="1">
                 <tr>
                     <td>NOMBRE</td>
