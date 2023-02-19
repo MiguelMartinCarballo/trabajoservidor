@@ -9,7 +9,7 @@ class HairSalon extends Model
 {
     use HasFactory;
 
-
+protected $table='hairsalon';
     public function center() {
         return $this->belongsTo(Center::class);
 

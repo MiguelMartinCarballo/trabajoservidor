@@ -18,10 +18,16 @@ class ClientController extends Controller
     {
         // $this->authorize('viewAny',Client::class);
 
-       
-        $clienteList = Client::all();
+
+        if((session('admin'))){
+            $clienteList = Client::all();
         
-        return view('client.index',['clienteList'=>$clienteList]);
+            return view('client.index',['clienteList'=>$clienteList]);
+        }else{
+            return  redirect()->route('denied');
+        }
+       
+       
     }
 
     public function session($admin){
@@ -42,10 +48,15 @@ class ClientController extends Controller
 
 
     {
+
+        if((session('admin'))){
         $tratamientoList = Treatment::all();
         $centerList = Center::all();
         // $this->authorize("create",Client::class);
         return view('client.create',['tratamientoList'=>$tratamientoList],['centerList'=>$centerList]);
+            }else{
+            return  redirect()->route('denied');
+        }
     }
 
     /**
@@ -116,12 +127,19 @@ class ClientController extends Controller
     public function show($id)
     {
 
- 
+        if((session('admin'))){
         $cliente= Client::find($id);
 
-        
+        $suma=$cliente->treatments->sum('Precio');
+
        
-        return view('client.show',['cliente'=>$cliente]);
+        // dd($cliente->center->hairsalon);
+  
+       
+        return view('client.show',['cliente'=>$cliente, 'suma'=>$suma]);
+        }else{
+            return  redirect()->route('denied'); 
+        }
     }
 
     /**
@@ -132,12 +150,17 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
+
+        if((session('admin'))){
         $client= Client::find($id);
         // $this->authorize("update",$client);
         $tratamientoList = Treatment::all();
         $centerList = Center::all();
         
         return view('client.edit',['cliente'=>$client, 'tratamientoList'=>$tratamientoList,'centerList'=>$centerList]);
+    }else{
+        return  redirect()->route('denied'); 
+    }
     }
 
     /**

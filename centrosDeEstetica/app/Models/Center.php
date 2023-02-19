@@ -11,9 +11,11 @@ class Center extends Model
 
     protected $fillable=["Nombre","Direccion","CIF","Razon social"];
 
+    public function hairsalon() {
+        return $this->hasMany(hairsalon::class);
+    }
 
-
-    public function client() {
-        return $this->hasMany(Client::class);
+    public function aesthetic() {
+        return $this->hasMany(Aesthetic::class);
     }
 }

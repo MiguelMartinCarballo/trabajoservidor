@@ -9,9 +9,19 @@
             <br>
             <h2>CLIENTE {{$cliente->id}}</h2>
             <a href="{{route('clientes.create')}}">Nuevo cliente</a>
-
+            <p>{{$cliente->center->Nombre}} </p>
+            <p>{{$cliente->center->Direccion}} </p>
+            <p>{{$cliente->center->CIF}} </p>
+            <p>{{$cliente->center->hairsalon}} </p>
             <table class="table table-striped table-hover" border="1">
-               
+                <tr>
+                    <td>NOMBRE</td>
+                        <td>APELLIDOS</td>
+                        <td>DIRECCION</td>
+                        <td>EMAIL</td>
+                        <td>Numero de centro</td>
+                        <td>gestionar</td>
+                </tr>
                 <tr>
                     <td>{{$cliente->nombre}}</td>
                     <td>{{$cliente->apellidos}}</td>
@@ -19,7 +29,7 @@
                     <td>{{$cliente->email}}</td>
                     <td>{{$cliente->center_id}}</td>
                     <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary">Editar</a></td>
-                 
+                    @if(session('admin')=="gerente")
                     <td>
                         <form action="{{route('clientes.destroy',$cliente->id)}}" method="post">
                             @csrf
@@ -28,6 +38,8 @@
                         <button type="submit" class="btn btn-primary">Borrar</button>
                         </form>
                     </td>
+                    @else
+                    @endif
                 </tr>
             </table>
 
@@ -49,10 +61,15 @@
                <tr>
                    <td>{{$pedidos->Nombre}}</td>
                    <td>{{$pedidos->Descripcion}}</td>
-                   <td>{{$pedidos->Precio}}</td>
-            
+                   <td>{{$pedidos->Precio}} $</td>
                </tr>
                @endforeach
+
+               <tr>
+                <td></td>
+                <td>Suma total </td>
+                <td>{{$suma}} $</td>
+               </tr>
            </table>
            @endif
             </div>

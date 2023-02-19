@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/session/{admin}',[ClientController::class,'session'])->name('session');
 Route::get('/salir',[ClientController::class,'salir'])->name('salir');
+Route::get('/studies/create',[StudyController::class, 'create']);
+
 
 Route::resource('clientes',ClientController::class);
 
@@ -26,6 +28,9 @@ Route::get('/', function () {
 //     return view('welcome');
 // });
 
+Route::get('/denied',function () {
+
+    return view('denied');})->name('denied');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
