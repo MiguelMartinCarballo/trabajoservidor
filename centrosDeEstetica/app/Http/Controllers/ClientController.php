@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\ClientTreatment;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -134,10 +135,32 @@ class ClientController extends Controller
         
 
         $suma=$cliente->treatments->sum('Precio');
-        
+      
         $centro=$cliente->center;
-         $tipo=$centro->aesthetic;
-         $tipo=$centro->hairsalon;
+        
+    //    dd($centro);
+    
+    
+    // $peluqeria=$centro->hairsalon; 
+    // $estetica=$centro->aesthetic;
+
+   
+       $peluqueria=(DB::table('hairsalon')
+       ->where('center_id', '=', $centro->id)
+       ->get());
+
+
+       $estetica=(DB::table('aesthetic')
+       ->where('center_id', '=', $centro->id)
+       ->get());
+
+     
+
+    
+        // dd($tipo);
+       
+        //  dd($centro->hairsalon);
+    // $centro->hairsalon->toArray()->capacidadMaxima;
 
         //dd($centro);
         //dd($tipo);
@@ -145,7 +168,7 @@ class ClientController extends Controller
 
         // dd($cliente->center->hairsalon);
   
-        return view('client.show',['cliente'=>$cliente, 'suma'=>$suma,'centro'=>$centro,'tipo'=>$tipo]);
+        return view('client.show',['cliente'=>$cliente, 'suma'=>$suma,'centro'=>$centro,'peluqueria'=>$peluqueria,'estetica'=>$estetica]);
         }else{
             return  redirect()->route('denied'); 
         }
@@ -208,13 +231,16 @@ class ClientController extends Controller
         $p->center_id=$request->input("center_id");
         $p->save();//save es un metodo eloquent
       
-        if($request->input("treatment_id")!="ninguno"){
-            $id=$p->id;
-            $t= new ClientTreatment;
-            $t->client_id=$id;
-            $t->treatment_id=$request->input("treatment_id");
-            $t->save();
-        }
+
+
+
+        // if($request->input("treatment_id")!="ninguno"){
+        //     $id=$p->id;
+        //     $t= new ClientTreatment;
+        //     $t->client_id=$id;
+        //     $t->treatment_id=$request->input("treatment_id");
+        //     $t->save();
+        // }
        
         
 
@@ -236,4 +262,6 @@ class ClientController extends Controller
         $p->delete();
         return redirect()->action([ClientController::class, 'index'])->with('exito','Client borrado correctamente');
     }
+
+   
 }

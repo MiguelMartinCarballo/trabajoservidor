@@ -13,6 +13,11 @@
         <div class="alert alert-success">
             {{ session('exito') }}
         </div>
+       @endif 
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
         @endif
     
         <h4>session: {{session('admin')}}</h4> 
@@ -30,7 +35,7 @@
                         <td>{{$cliente->direccion}}</td>
                         <td>{{$cliente->email}}</td>
                         <td>{{$cliente->center_id}}</td>
-                        
+                        <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary">add</a></td>
                         <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary">Editar</a></td>
                         <td><a href="{{route('clientes.show',$cliente->id)}}"class="btn btn-primary">Ver</a></td>
     

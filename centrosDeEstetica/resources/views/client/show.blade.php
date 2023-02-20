@@ -12,7 +12,18 @@
             <p>{{$centro->Nombre}} </p>
             <p>{{$centro->Direccion}} </p>
             <p>{{$centro->CIF}} </p>
-            <p>{{$tipo}} </p>
+
+
+     
+            @if(!empty($peluqueria[0]))
+            <p>capacidad maxima: {{ $peluqueria[0]->capacidadMaxima}} </p>
+            <p>unisex:{{ $peluqueria[0]->unisex}} </p> 
+         
+            @else
+            <p>Numero de salas: {{ $estetica[0]->numeroSalas}} </p>
+            <p>fisioterapia :{{ $estetica[0]->fisioterapia}} </p>
+      
+            @endif
             <table class="table table-striped table-hover" border="1">
                 <tr>
                     <td>NOMBRE</td>

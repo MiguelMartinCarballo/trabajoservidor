@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Aesthetic extends Model
 {
     use HasFactory;
-    protected $table='aestheic';
+    protected $table='aesthetic';
+
+    protected $fillable=["numeroSalas","fisioterapia"];
     public function center() {
         return $this->belongsTo(Center::class);
     }

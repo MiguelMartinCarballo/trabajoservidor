@@ -40,7 +40,7 @@
                             </select>
                         </div>
                      
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="" class="form-label">Elige un tratamiento</label>
                             <select  class="form-select form-select-lg" name="treatment_id" id="">
                                 <option value="ninguno" selected>Ninguno</option>
@@ -49,7 +49,7 @@
                                 <option value={{$tratamiento->id}}>{{$tratamiento->Nombre}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
     
 
                         <button class="btn btn-primary" type="submit" value="actualizar">ACTUALIZAR</button>

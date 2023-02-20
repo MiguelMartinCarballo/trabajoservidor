@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientTreatmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/session/{admin}',[ClientController::class,'session'])->name('session');
 Route::get('/salir',[ClientController::class,'salir'])->name('salir');
-Route::get('/studies/create',[StudyController::class, 'create']);
+
+//Route::put('/aa/{id}',[ClientTreatmentController::class, 'addTreatment'])->name('tratamiento');
+
+//Route::get('/add/{id}',[ClientTreatmentController::class, 'add'])->name('add');
+
+Route::resource('tratamientoParaClientes',ClientTreatmentController::class);
 
 
 Route::resource('clientes',ClientController::class);
