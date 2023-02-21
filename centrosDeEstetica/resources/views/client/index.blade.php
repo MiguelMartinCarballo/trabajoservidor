@@ -20,24 +20,42 @@
         </div>
         @endif
     
-        <h4>session: {{session('admin')}}</h4> 
+        <h5 class="float-end">Cuenta: <b >{{session('admin')}}</b></h5> 
     
                 <br>
-                Lista clientes
-                <a href="{{route('clientes.create')}}">Nuevo cliente</a>
+                <h3 class="mb-4">Lista clientes</h3>
+                <a class="btn btn-primary bg-success"href="{{route('clientes.create')}}">Nuevo cliente</a>
+                <br>
+                <br>
     
                 <table class="table table-striped table-hover" border="1">
+
+
+                    <tr class="bg-info">
+                    <td>Nombre</td>
+                    <td>Apellidos</td>
+                    <td>Direccion</td>
+                    <td>Email</td>
+                    <td>Centro</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    @if(session('admin')=="gerente")
+                    <td></td>
+                    @endif
+               
+                </tr>
                     @foreach($clienteList as $cliente)
-                    <tr>
+                    <tr >
                        
                         <td>{{$cliente->nombre}}</td>
                         <td>{{$cliente->apellidos}}</td>
                         <td>{{$cliente->direccion}}</td>
                         <td>{{$cliente->email}}</td>
-                        <td>{{$cliente->center_id}}</td>
-                        <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary">add</a></td>
-                        <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary">Editar</a></td>
-                        <td><a href="{{route('clientes.show',$cliente->id)}}"class="btn btn-primary">Ver</a></td>
+                        <td>{{$cliente->center->Nombre}}</td>
+                        <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">añadir tratamiento</a></td>
+                        <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">Editar</a></td>
+                        <td><a href="{{route('clientes.show',$cliente->id)}}"class="btn btn-primary bg-success">Ver</a></td>
     
                         @if(session('admin')=="gerente")
                         <td>
@@ -45,7 +63,7 @@
                                 @csrf
                                 @method("DELETE")
                                 
-                            <button type="submit" class="btn btn-primary">Borrar</button>
+                            <button type="submit" class="btn btn-primary bg-danger">Borrar</button>
                             </form>
                         </td>  
                         @else

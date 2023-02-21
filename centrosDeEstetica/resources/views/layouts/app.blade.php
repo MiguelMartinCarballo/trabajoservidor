@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm">
             <div class="container">
            
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -29,7 +29,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="">Gestion de centros</a>
+                            <a class="nav-link text-white" href="">Gestion de centros</a>
                         </li>
                     </ul>
                 
@@ -51,7 +51,7 @@
                            @if(session('admin'))
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('salir')}}">Salir</a>
+                                <a class="text-white nav-link" href="{{route('salir')}}">Salir</a>
                             </li>
                       @endif
                         @else
