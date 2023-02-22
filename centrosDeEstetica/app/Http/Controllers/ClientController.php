@@ -14,48 +14,99 @@ use Illuminate\Support\Facades\DB;
 class ClientController extends Controller
 {
 
-   
+
     public function index()
     {
         // $this->authorize('viewAny',Client::class);
 
 
-        if((session('admin'))){
-            $clienteList = Client::all();
-        
-            return view('client.index',['clienteList'=>$clienteList]);
-        }else{
+        if ((session('admin'))) {
+            $clienteList = DB::table('clients')
+            ->where('center_id', '=', (session('center')))
+            ->get();
+
+            $centro =  DB::table('centers')
+                ->where('id', '=', (session('center')))
+                ->get();
+                // dd($centro);
+
+                $peluqueria = (DB::table('hairsalon')
+                ->where('center_id', '=', $centro[0]->id)
+                ->get());
+
+
+            $estetica = (DB::table('aesthetic')
+                ->where('center_id', '=', $centro[0]->id)
+                ->get());
+    
+
+            return view('client.index', ['clienteList' => $clienteList,'centro'=>$centro,'peluqueria' => $peluqueria, 'estetica' => $estetica]);
+        } else {
             return  redirect()->route('denied');
         }
-       
-       
     }
 
-    public function session($admin){
-        session(['admin'=>$admin]);
-        return redirect()->action([ClientController::class, 'index'])->with('exito',"has accedido en calidad de $admin");
-
+    public function session($admin)
+    {
+        session(['admin' => $admin]);
+        return redirect()->action([CenterController::class, 'index'])->with('exito', "has accedido en calidad de $admin");
     }
-  
 
-    public function salir(){
+    public function session2($centro)
+    {
+
+        session(['center' => $centro]);
+
+
+        return redirect()->action([ClientController::class, 'index'])->with('exito', "Has accedido al centro numero: $centro");
+    }
+
+
+    public function salir()
+    {
 
         session()->forget('admin');
 
         return  redirect()->route('welcome');
-
     }
     public function create()
 
 
     {
 
-        if((session('admin'))){
-        $tratamientoList = Treatment::all();
-        $centerList = Center::all();
-        // $this->authorize("create",Client::class);
-        return view('client.create',['tratamientoList'=>$tratamientoList],['centerList'=>$centerList]);
+        if ((session('admin'))) {
+
+
+
+            
+            $centerList = Center::all();
+
+
+            $centro =  DB::table('centers')
+            ->where('id', '=', (session('center')))
+            ->get();
+            $peluqueria = (DB::table('hairsalon')
+            ->where('center_id', '=', $centro[0]->id)
+            ->get());
+
+
+           
+            if(!empty($peluqueria[0])){
+
+                $tratamientoList= DB::table('treatments')
+                ->where('Tipo', '=', 0)
+               
+                ->get();
             }else{
+
+                $tratamientoList= DB::table('treatments')
+                ->where('Tipo', '=', 1)
+               
+                ->get();
+            }
+            // $this->authorize("create",Client::class);
+            return view('client.create', ['tratamientoList' => $tratamientoList], ['centerList' => $centerList]);
+        } else {
             return  redirect()->route('denied');
         }
     }
@@ -66,57 +117,56 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store(Request $request)
     {
 
         $request->validate([
 
-            'nombre'=>'required',
-            'apellidos'=>'required',
-            'direccion'=>'required',
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'direccion' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'center_id'=>'required'
-            ],[
-                'nombre.required'=> 'Debes rellenar el nombre',
-                'nombre.max'=> 'El nombre no puede exceder de 100 caracteres',
-                'apellido.required'=>'Debes rellenar el apellido',
-                'direccion.required'=> 'Debes rellenar la direccion',
-                'email.required' => 'Debes rellenar el campo email',
-                'center_id.required' => 'Debes rellenar el campo id del centro'
-    
-            ]);
+            
+        ], [
+            'nombre.required' => 'Debes rellenar el nombre',
+            'nombre.max' => 'El nombre no puede exceder de 100 caracteres',
+            'apellido.required' => 'Debes rellenar el apellido',
+            'direccion.required' => 'Debes rellenar la direccion',
+            'email.required' => 'Debes rellenar el campo email',
+            
 
-         $p = new Client;
-         
-   
-    
-        $p->nombre=$request->input("nombre");
-        $p->apellidos=$request->input("apellidos");
-        $p->direccion=$request->input("direccion");
-        $p->email=$request->input("email");
-        $p->center_id=$request->input("center_id");
+        ]);
+
+        $p = new Client;
+
+
+
+        $p->nombre = $request->input("nombre");
+        $p->apellidos = $request->input("apellidos");
+        $p->direccion = $request->input("direccion");
+        $p->email = $request->input("email");
+        $p->center_id = (session('center'));
         $p->save();
 
-        if($request->input("treatment_id")!="ninguno"){
-            $id=$p->id;
-            $t= new ClientTreatment;
-            $t->client_id=$id;
-            $t->treatment_id=$request->input("treatment_id");
+        if ($request->input("treatment_id") != "ninguno") {
+            $id = $p->id;
+            $t = new ClientTreatment;
+            $t->client_id = $id;
+            $t->treatment_id = $request->input("treatment_id");
             $t->save();
         }
-       
+
         // $p->save();//save es un metodo eloquent
-  
-       
+
+
 
         // $id = Client::select('id')->where('email', $p->email)->first();
 
-       
-  
+
+
 
         // $this->authorize("update",$client);
-        return redirect()->action([ClientController::class, 'index'])->with('exito','Cliente añadido correctamente');
-
+        return redirect()->action([ClientController::class, 'index'])->with('exito', 'Cliente añadido correctamente');
     }
 
     /**
@@ -128,49 +178,49 @@ class ClientController extends Controller
     public function show($id)
     {
 
-        if((session('admin'))){
+        if ((session('admin'))) {
 
-        $cliente= Client::find($id);
-
-        
-
-        $suma=$cliente->treatments->sum('Precio');
-      
-        $centro=$cliente->center;
-        
-    //    dd($centro);
-    
-    
-    // $peluqeria=$centro->hairsalon; 
-    // $estetica=$centro->aesthetic;
-
-   
-       $peluqueria=(DB::table('hairsalon')
-       ->where('center_id', '=', $centro->id)
-       ->get());
+            $cliente = Client::find($id);
 
 
-       $estetica=(DB::table('aesthetic')
-       ->where('center_id', '=', $centro->id)
-       ->get());
 
-     
+            $suma = $cliente->treatments->sum('Precio');
 
-    
-        // dd($tipo);
-       
-        //  dd($centro->hairsalon);
-    // $centro->hairsalon->toArray()->capacidadMaxima;
+            $centro = $cliente->center;
 
-        //dd($centro);
-        //dd($tipo);
-  
+            //    dd($centro);
 
-        // dd($cliente->center->hairsalon);
-  
-        return view('client.show',['cliente'=>$cliente, 'suma'=>$suma,'centro'=>$centro,'peluqueria'=>$peluqueria,'estetica'=>$estetica]);
-        }else{
-            return  redirect()->route('denied'); 
+
+            // $peluqeria=$centro->hairsalon; 
+            // $estetica=$centro->aesthetic;
+
+
+            $peluqueria = (DB::table('hairsalon')
+                ->where('center_id', '=', $centro->id)
+                ->get());
+
+
+            $estetica = (DB::table('aesthetic')
+                ->where('center_id', '=', $centro->id)
+                ->get());
+
+
+
+
+            // dd($tipo);
+
+            //  dd($centro->hairsalon);
+            // $centro->hairsalon->toArray()->capacidadMaxima;
+
+            //dd($centro);
+            //dd($tipo);
+
+
+            // dd($cliente->center->hairsalon);
+
+            return view('client.show', ['cliente' => $cliente, 'suma' => $suma, 'centro' => $centro, 'peluqueria' => $peluqueria, 'estetica' => $estetica]);
+        } else {
+            return  redirect()->route('denied');
         }
     }
 
@@ -183,16 +233,16 @@ class ClientController extends Controller
     public function edit($id)
     {
 
-        if((session('admin'))){
-        $client= Client::find($id);
-        // $this->authorize("update",$client);
-        $tratamientoList = Treatment::all();
-        $centerList = Center::all();
-        
-        return view('client.edit',['cliente'=>$client, 'tratamientoList'=>$tratamientoList,'centerList'=>$centerList]);
-    }else{
-        return  redirect()->route('denied'); 
-    }
+        if ((session('admin'))) {
+            $client = Client::find($id);
+            // $this->authorize("update",$client);
+            $tratamientoList = Treatment::all();
+            $centerList = Center::all();
+
+            return view('client.edit', ['cliente' => $client, 'tratamientoList' => $tratamientoList, 'centerList' => $centerList]);
+        } else {
+            return  redirect()->route('denied');
+        }
     }
 
     /**
@@ -206,31 +256,31 @@ class ClientController extends Controller
     {
         $request->validate([
 
-            'nombre'=>'required',
-            'apellidos'=>'required',
-            'direccion'=>'required',
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'direccion' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'center_id'=>'required'
-            ],[
-                'nombre.required'=> 'Debes rellenar el nombre',
-                'nombre.max'=> 'El nombre no puede exceder de 100 caracteres',
-                'apellido.required'=>'Debes rellenar el apellido',
-                'direccion.required'=> 'Debes rellenar la direccion',
-                'email.required' => 'Debes rellenar el campo email',
-                'center_id.required' => 'Debes rellenar el campo id del centro'
-    
-            ]);
+
+        ], [
+            'nombre.required' => 'Debes rellenar el nombre',
+            'nombre.max' => 'El nombre no puede exceder de 100 caracteres',
+            'apellido.required' => 'Debes rellenar el apellido',
+            'direccion.required' => 'Debes rellenar la direccion',
+            'email.required' => 'Debes rellenar el campo email',
+        
+
+        ]);
 
 
-        $p= Client::find($id);
+        $p = Client::find($id);
         // $this->authorize("update",$p);
-        $p->nombre=$request->input("nombre");
-        $p->apellidos=$request->input("apellidos");
-        $p->direccion=$request->input("direccion");
-        $p->email=$request->input("email");
-        $p->center_id=$request->input("center_id");
-        $p->save();//save es un metodo eloquent
-      
+        $p->nombre = $request->input("nombre");
+        $p->apellidos = $request->input("apellidos");
+        $p->direccion = $request->input("direccion");
+        $p->email = $request->input("email");
+        $p->center_id = (session('center'));
+        $p->save(); //save es un metodo eloquent
+
 
 
 
@@ -241,12 +291,10 @@ class ClientController extends Controller
         //     $t->treatment_id=$request->input("treatment_id");
         //     $t->save();
         // }
-       
-        
 
-        return redirect()->action([ClientController::class, 'index'])->with('exito','Cliente actualizado correctamente');
 
-      
+
+        return redirect()->action([ClientController::class, 'index'])->with('exito', 'Cliente actualizado correctamente');
     }
 
     /**
@@ -258,10 +306,8 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
-        $p= Client::find($id);
+        $p = Client::find($id);
         $p->delete();
-        return redirect()->action([ClientController::class, 'index'])->with('exito','Client borrado correctamente');
+        return redirect()->action([ClientController::class, 'index'])->with('exito', 'Client borrado correctamente');
     }
-
-   
 }

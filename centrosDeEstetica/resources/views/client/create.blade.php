@@ -46,7 +46,7 @@
                 <div class="col-1"></div>
                 <div class="col-5">
 
-                    <div class="row bg-info border border-primary p-4">
+                    <div class=" row bg-info border border-primary p-4">
 
                         <div class="col-5">
                             <form class="form"method="post" action="{{ route('clientes.store') }}">
@@ -54,29 +54,22 @@
 
 
                                 <div class="my-3  form-outline">
-                                    Nombre: <input class=" border bg-white" type="text" name="nombre">
+                                    Nombre: <input class=" text-dark border bg-white" type="text" name="nombre">
                                 </div>
                                 <div class="my-3">
-                                    Apellido: <input class=" border bg-white" type="text" name="apellidos">
+                                    Apellido: <input class="text-dark border bg-white" type="text" name="apellidos">
                                 </div>
                                 <div class="my-3">
-                                    Direccion: <input class="border bg-white" type="text" name="direccion">
+                                    Direccion: <input class=" text-dark border bg-white" type="text" name="direccion">
                                 </div>
                                 <div class="my-3">
-                                    Email: <input class="border bg-white" type="text" name="email">
+                                    Email: <input class=" text-dark border bg-white" type="text" name="email">
                                 </div>
 
                         </div>
                         <div class="col-6">
                             <br>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Elige un Centro</label>
-                                <select class="form-select form-select-md selectCentro" name="center_id" id="">
-                                    @foreach ($centerList as $center)
-                                        <option value={{ $center->id }}>{{ $center->Nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                         
 
                             <div class="mb-5">
                                 <label for="" class="form-label">Elige un tratamiento</label>

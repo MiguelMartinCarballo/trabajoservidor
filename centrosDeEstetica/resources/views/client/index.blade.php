@@ -22,6 +22,29 @@
     
         <h5 class="float-end">Cuenta: <b >{{session('admin')}}</b></h5> 
     
+
+
+
+          @if(!empty($peluqueria[0]))
+            <h3>Peluquería</h3>
+            <p>Nombre:{{$centro[0]->Nombre}} <br>
+            direccion: {{$centro[0]->Direccion}} <br>
+            CIF:  {{$centro[0]->CIF}} <br>
+            capacidad máxima:  {{ $peluqueria[0]->capacidadMaxima}} <br>
+            unisex: @if ($peluqueria[0]->unisex==1) 
+            si @else no @endif</p> 
+         
+            @else
+
+            <h3>Centro de estética</h3>
+
+            <p>Nombre: {{$centro[0]->Nombre}} <br>
+                direccion: {{$centro[0]->Direccion}} <br>
+                 CIF:  {{$centro[0]->CIF}} <br>
+                 número de salas:  {{ $estetica[0]->numeroSalas}} <br>
+                 fisioterapia: @if($estetica[0]->fisioterapia==1 ) si @else no @endif</p> 
+
+            @endif
                 <br>
                 <h3 class="mb-4">Lista clientes</h3>
                 <a class="btn btn-primary bg-success"href="{{route('clientes.create')}}">Nuevo cliente</a>
@@ -36,7 +59,7 @@
                     <td>Apellidos</td>
                     <td>Direccion</td>
                     <td>Email</td>
-                    <td>Centro</td>
+                
                     <td></td>
                     <td></td>
                     <td></td>
@@ -52,7 +75,7 @@
                         <td>{{$cliente->apellidos}}</td>
                         <td>{{$cliente->direccion}}</td>
                         <td>{{$cliente->email}}</td>
-                        <td>{{$cliente->center->Nombre}}</td>
+                        {{-- <td>{{$cliente->center->Nombre}}</td> --}}
                         <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">añadir tratamiento</a></td>
                         <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">Editar</a></td>
                         <td><a href="{{route('clientes.show',$cliente->id)}}"class="btn btn-primary bg-success">Ver</a></td>

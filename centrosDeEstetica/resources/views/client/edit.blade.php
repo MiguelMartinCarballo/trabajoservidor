@@ -44,15 +44,7 @@
                             </div>
                             <div class="col-6">
 
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Elige un Centro</label>
-                                    <select class="form-select form-select-md" name="center_id" id="">
-
-                                        @foreach ($centerList as $center)
-                                            <option value={{ $center->id }}>{{ $center->Nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                           
                             </div>
 
 

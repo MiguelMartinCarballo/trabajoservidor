@@ -7,13 +7,13 @@
 
 
             <br>
-            <h2>CLIENTE {{$cliente->id}}</h2>
+            <h2>CLIENTE {{$cliente->nombre}}</h2>
             {{-- <a href="{{route('clientes.create')}}">Nuevo cliente</a> --}}
                 <br>
 
             
             
-            <p> </p>
+            {{-- <p> </p>
             <p> </p>
 
 
@@ -30,7 +30,7 @@
            
             
       
-            @endif
+            @endif --}}
             <table class="table table-striped table-hover" border="1">
                 <tr class="bg-info">
                     <td>NOMBRE</td>

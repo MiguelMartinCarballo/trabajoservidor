@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CenterController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientTreatmentController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/session/{admin}',[ClientController::class,'session'])->name('session');
+Route::get('/session2/{center}',[ClientController::class,'session2'])->name('session2');
 Route::get('/salir',[ClientController::class,'salir'])->name('salir');
 
 //Route::put('/aa/{id}',[ClientTreatmentController::class, 'addTreatment'])->name('tratamiento');
@@ -24,6 +26,7 @@ Route::get('/salir',[ClientController::class,'salir'])->name('salir');
 
 Route::resource('tratamientoParaClientes',ClientTreatmentController::class);
 
+Route::get('/center',[CenterController::class, 'index']);
 
 Route::resource('clientes',ClientController::class);
 

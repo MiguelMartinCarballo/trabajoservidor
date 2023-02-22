@@ -34,7 +34,32 @@ class ClientTreatmentController extends Controller
 
                     $tratamientoParaCliente= Client::find($id);
                     // $this->authorize("update",$client);
-                    $tratamientoList = Treatment::all();
+                    $centro =  DB::table('centers')
+                    ->where('id', '=', (session('center')))
+                    ->get();
+                    $peluqueria = (DB::table('hairsalon')
+                    ->where('center_id', '=', $centro[0]->id)
+                    ->get());
+    
+    
+                   
+                    if(!empty($peluqueria[0])){
+
+                        $tratamientoList= DB::table('treatments')
+                        ->where('Tipo', '=', 0)
+                       
+                        ->get();
+                    }else{
+
+                        $tratamientoList= DB::table('treatments')
+                        ->where('Tipo', '=', 1)
+                       
+                        ->get();
+                    }
+
+                  
+                  
+                // //   = Treatment::all();
                    
                     
                     return view('tratamientoParaClientes.edit',['tratamientoParaCliente'=>$tratamientoParaCliente, 'tratamientoList'=>$tratamientoList]);

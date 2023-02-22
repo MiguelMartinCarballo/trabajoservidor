@@ -17,7 +17,7 @@ class CenterFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
 
             "Nombre" => $this->faker->name(),
             "Direccion"=>$this->faker->address(),
