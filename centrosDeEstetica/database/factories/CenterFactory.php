@@ -19,7 +19,7 @@ class CenterFactory extends Factory
         return [
             //
 
-            "Nombre" => $this->faker->word(),
+            "Nombre" => $this->faker->name(),
             "Direccion"=>$this->faker->address(),
             "CIF"=>$this->faker->dni(),
             "Razon social" => $this->faker->word()

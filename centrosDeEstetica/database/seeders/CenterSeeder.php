@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Center;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CenterSeeder extends Seeder
 {
@@ -15,8 +16,6 @@ class CenterSeeder extends Seeder
      */
     public function run()
     {
-        Center::factory()
-        ->count(10)
-        ->create();
+        Center::factory(10)->create();
     }
 }

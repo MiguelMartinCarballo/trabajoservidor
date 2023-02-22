@@ -17,8 +17,10 @@ class AestheticFactory extends Factory
     public function definition()
     {
         return [
-            //
             
+            "numeroSalas" => 1,
+            "fisioterapia"=>true,
+
         ];
     }
 }

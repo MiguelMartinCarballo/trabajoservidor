@@ -17,7 +17,8 @@ class HairSalonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "capacidadMaxima" => 1,
+            "unisex"=>true,
         ];
     }
 }

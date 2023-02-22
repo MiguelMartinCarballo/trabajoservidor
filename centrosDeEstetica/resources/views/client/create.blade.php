@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -31,11 +32,11 @@
                             <td>DESCRIPCION</td>
                             <td>PRECIO</td>
                         </tr>
-                        @foreach ($tratamientoList as $pedidos)
+                        @foreach ($tratamientoList as $tratamiento)
                             <tr>
-                                <td>{{ $pedidos->Nombre }}</td>
-                                <td>{{ $pedidos->Descripcion }}</td>
-                                <td>{{ $pedidos->Precio }} $</td>
+                                <td>{{ $tratamiento->Nombre }}</td>
+                                <td>{{ $tratamiento->Descripcion }}</td>
+                                <td>{{ $tratamiento->Precio }} $</td>
                             </tr>
                         @endforeach
 
@@ -70,8 +71,7 @@
                             <br>
                             <div class="mb-3">
                                 <label for="" class="form-label">Elige un Centro</label>
-                                <select class="form-select form-select-md" name="center_id" id="">
-
+                                <select class="form-select form-select-md selectCentro" name="center_id" id="">
                                     @foreach ($centerList as $center)
                                         <option value={{ $center->id }}>{{ $center->Nombre }}</option>
                                     @endforeach
