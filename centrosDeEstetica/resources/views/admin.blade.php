@@ -15,8 +15,8 @@
             <div
                 class="h-100 p-5 text-white bg-info border rounded-3">
                 <h2>GERENTE</h2>
-                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
-                    mix and match with additional component themes and more.</p>
+                <p>Los gerentes son un tipo de administradores que pueden realizar
+                    cualquier acción sobre los socios (crear, eliminar, ver, modificar, etc..).</p>
                 <a class="btn btn-outline-light bg-dark text-white"  type="button"  href="{{route('session', 'gerente')}}">Acceder</a>
             </div>
         </div>
@@ -24,9 +24,9 @@
             <div
                 class="h-100 p-5 bg-success border rounded-3">
                 <h2>RECEPCIONISTA</h2>
-                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure
-                    to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both
-                    column's content for equal-height.</p>
+                <p>Los recepcionistas pueden dar de alta nuevos socios, ver
+                    los socios ya creados, y modificar los datos de un socio, pero no puede dar de baja
+                    ninguno de ellos. </p>
                 <a class="btn btn-outline-light bg-dark text-white" type="button" href="{{route('session','recepcionista')}}">Acceder</a>
             </div>
         </div>

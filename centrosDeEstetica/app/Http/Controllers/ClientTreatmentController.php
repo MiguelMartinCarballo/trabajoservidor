@@ -65,6 +65,8 @@ class ClientTreatmentController extends Controller
                     return view('tratamientoParaClientes.edit',['tratamientoParaCliente'=>$tratamientoParaCliente, 'tratamientoList'=>$tratamientoList]);
                 }else{
 
+                   $day= date("d-m-Y",strtotime(today()));
+                   
                     return redirect()->action([ClientController::class, 'index'])->with('error',"El Cliente tiene un tratamiento ya asignado para la fecha $day");
 
                 }

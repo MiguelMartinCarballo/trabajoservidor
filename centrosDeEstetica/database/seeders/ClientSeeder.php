@@ -18,7 +18,7 @@ class ClientSeeder extends Seeder
         //
 
         Client::factory()
-        ->count(10)
+        ->count(50)
         ->create();
     }
 }

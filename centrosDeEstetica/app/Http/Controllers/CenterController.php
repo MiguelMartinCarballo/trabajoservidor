@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Center;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CenterController extends Controller
 {
@@ -18,8 +19,11 @@ class CenterController extends Controller
         if((session('admin'))){
             
             $centro = Center::all();
+            $color= ['bg-success','bg-info'];
+      
+
  
-            return view('center.index',['centro'=>$centro]);
+            return view('center.index',['centro'=>$centro ,'color'=>$color]);
         }else{
             return  redirect()->route('denied');
         }

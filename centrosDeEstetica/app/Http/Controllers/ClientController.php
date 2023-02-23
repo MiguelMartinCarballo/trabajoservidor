@@ -11,6 +11,15 @@ use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+//Nuestro trabajo utuliza sessiones para detectar que tipo de administrador eres es decir segun la session que tengas
+// ya sea gerente la cual tendras acceso total a todas las opciones o recepcionista la cual nopodras dar de baja a los socios
+// Cada socio pertenece a un centro por lo cual se accedra primero al centro que se quiere gestionar
+// Una vez dentro si se crea un socio gracias a la session que se crea al entrar en el toda la info, relacionada con el
+// es decir saldran todos los socios que pertenezcan a ese centro. Por lo tanto si dentro de un centro creas un socio
+// Sera añadido automaticamente a ese centro.
+
+
 class ClientController extends Controller
 {
 
@@ -46,6 +55,8 @@ class ClientController extends Controller
         }
     }
 
+
+    //metodos que crean la session y devuelven una vista en la que va ser utilizada esa session
     public function session($admin)
     {
         session(['admin' => $admin]);
@@ -61,6 +72,7 @@ class ClientController extends Controller
         return redirect()->action([ClientController::class, 'index'])->with('exito', "Has accedido al centro numero: $centro");
     }
 
+    //Este metodo borra la session al pulsar el boton salir
 
     public function salir()
     {

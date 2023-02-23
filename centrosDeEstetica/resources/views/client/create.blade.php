@@ -53,17 +53,18 @@
                                 @csrf
 
 
-                                <div class="my-3  form-outline">
-                                    Nombre: <input class=" text-dark border bg-white" type="text" name="nombre">
+                                <div class="my-3 form-label form-outline">
+                                    
+                                    Nombre: <input class="form-control input-lg text-dark border bg-white" type="text" name="nombre">
                                 </div>
                                 <div class="my-3">
-                                    Apellido: <input class="text-dark border bg-white" type="text" name="apellidos">
+                                    Apellido: <input class=" form-control input-lg text-dark border bg-white" type="text" name="apellidos">
                                 </div>
                                 <div class="my-3">
-                                    Direccion: <input class=" text-dark border bg-white" type="text" name="direccion">
+                                    Direccion: <input class="form-control input-lg text-dark border bg-white" type="text" name="direccion">
                                 </div>
                                 <div class="my-3">
-                                    Email: <input class=" text-dark border bg-white" type="text" name="email">
+                                    Email: <input class="form-control input-lg text-dark border bg-white" type="text" name="email">
                                 </div>
 
                         </div>
@@ -72,8 +73,8 @@
                          
 
                             <div class="mb-5">
-                                <label for="" class="form-label">Elige un tratamiento</label>
-                                <select class="form-select form-select-md" name="treatment_id" id="">
+                                <label for="" class="form-label ">Elige un tratamiento</label>
+                                <select class="form-select form-select-md border bg-white" name="treatment_id" id="">
                                     <option value="ninguno" selected>Ninguno</option>
                                     @foreach ($tratamientoList as $tratamiento)
                                         <option value={{ $tratamiento->id }}>{{ $tratamiento->Nombre }}</option>

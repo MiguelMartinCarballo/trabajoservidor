@@ -7,7 +7,7 @@
 
 
             <br>
-            <h2>CLIENTE {{$cliente->nombre}}</h2>
+            <h2>{{$cliente->nombre}} {{$cliente->apellidos}} </h2>
             {{-- <a href="{{route('clientes.create')}}">Nuevo cliente</a> --}}
                 <br>
 
@@ -82,14 +82,14 @@
                <tr>
                    <td>{{$pedidos->Nombre}}</td>
                    <td>{{$pedidos->Descripcion}}</td>
-                   <td>{{$pedidos->Precio}} $</td>
+                   <td>{{$pedidos->Precio}} €</td>
                </tr>
                @endforeach
 
                <tr style="background-color: rgba(0, 0, 0, 0.39) ">
                 <td></td>
                 <td >Suma total </td>
-                <td >{{$suma}} $</td>
+                <td >{{$suma}} €</td>
                </tr>
            </table>
            @endif
