@@ -15,7 +15,7 @@ No se puede crear mas de un tratamiento el mismo dia para el mismo cliente como 
 Al añadir un cliente nuevo existe la opcion de poder tambien añadirle un tratamiento.
 
 
-##Importante hacer las migraciones, seeders y ejecutar el comando [ npm run dev ], ya que hemos instalado un tema the bootswatch.
+## Importante hacer las migraciones, seeders y ejecutar el comando [ npm run dev ], ya que hemos instalado un tema the bootswatch.
 
 
 
