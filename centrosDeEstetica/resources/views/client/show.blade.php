@@ -48,8 +48,8 @@
                     <td>{{$cliente->direccion}}</td>
                     <td>{{$cliente->email}}</td>
                     <td>{{$cliente->center_id}}</td>
-                    <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">añadir tratamiento</a></td>
-                    <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">Editar</a></td>
+                    <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary bg-primary">añadir tratamiento</a></td>
+                    <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary bg-warning">Editar</a></td>
                     @if(session('admin')=="gerente")
                     <td>
                         <form action="{{route('clientes.destroy',$cliente->id)}}" method="post">
@@ -86,7 +86,7 @@
                </tr>
                @endforeach
 
-               <tr style="background-color: rgba(0, 0, 0, 0.39) ">
+               <tr style="background-color: rgba(0, 0, 0, 0.066) ">
                 <td></td>
                 <td >Suma total </td>
                 <td >{{$suma}} €</td>

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/session/{admin}',[ClientController::class,'session'])->name('session');
 Route::get('/session2/{center}',[ClientController::class,'session2'])->name('session2');
 Route::get('/salir',[ClientController::class,'salir'])->name('salir');
+// Route::get('/volverACentros',[CenterController::class,'volverACentros'])->name('volverACentros');
 
 //Route::put('/aa/{id}',[ClientTreatmentController::class, 'addTreatment'])->name('tratamiento');
 
@@ -26,7 +27,7 @@ Route::get('/salir',[ClientController::class,'salir'])->name('salir');
 
 Route::resource('tratamientoParaClientes',ClientTreatmentController::class);
 
-Route::get('/center',[CenterController::class, 'index']);
+Route::get('/center',[CenterController::class, 'index'])->name('center');
 
 Route::resource('clientes',ClientController::class);
 

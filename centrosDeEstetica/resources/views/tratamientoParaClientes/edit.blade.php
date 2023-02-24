@@ -32,7 +32,7 @@
                 </table>
             </div>
             <div class="col-1"></div>
-            <div class="col-5 p-5 border border-info bg-info">
+            <div class="col-5 p-5 border border-info bg-info  border rounded">
 
 
                 <form method="POST"

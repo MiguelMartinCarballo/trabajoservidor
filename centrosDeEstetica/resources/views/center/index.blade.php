@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
+    
+    @if (session('exito'))
+    <div class="alert alert-success">
+        {{ session('exito') }}
+    </div>
+   @endif 
 
 
 <div class=" m-1 mb-5 row align-items-md-stretch">
@@ -41,5 +48,6 @@
 
    
   @endforeach
+</div>
 </div>
 @endsection

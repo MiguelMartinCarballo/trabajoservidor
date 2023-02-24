@@ -30,4 +30,13 @@ class CenterController extends Controller
        
        
     }
+
+    public function volverACentros()
+    {
+
+     
+
+        return  redirect()->route('center.index');
+        
+    }
 }

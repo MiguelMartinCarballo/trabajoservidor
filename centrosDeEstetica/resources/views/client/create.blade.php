@@ -46,7 +46,7 @@
                 <div class="col-1"></div>
                 <div class="col-5">
 
-                    <div class=" row bg-info border border-primary p-4">
+                    <div class=" row bg-info border border-primary rounded p-4">
 
                         <div class="col-5">
                             <form class="form"method="post" action="{{ route('clientes.store') }}">

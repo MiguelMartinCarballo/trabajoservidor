@@ -47,7 +47,7 @@
             @endif
                 <br>
                 <h3 class="mb-4">Lista clientes</h3>
-                <a class="btn btn-primary bg-success"href="{{route('clientes.create')}}">Nuevo cliente</a>
+                <a class="btn btn-primary bg-primary"href="{{route('clientes.create')}}">Nuevo cliente</a>
                 <br>
                 <br>
     
@@ -76,9 +76,10 @@
                         <td>{{$cliente->direccion}}</td>
                         <td>{{$cliente->email}}</td>
                         {{-- <td>{{$cliente->center->Nombre}}</td> --}}
-                        <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">añadir tratamiento</a></td>
-                        <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary bg-success">Editar</a></td>
+                        <td><a href="{{route('tratamientoParaClientes.edit',$cliente->id)}}" class="btn btn-primary bg-primary">añadir tratamiento</a></td>
                         <td><a href="{{route('clientes.show',$cliente->id)}}"class="btn btn-primary bg-success">Ver</a></td>
+                        <td><a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-primary bg-warning">Editar</a></td>
+               
     
                         @if(session('admin')=="gerente")
                         <td>

@@ -19,7 +19,7 @@
                     <div class="col-4">
                     
                             
-                            <div class="form bg-info p-5">
+                            <div class=" border rounded form bg-info p-5">
 
                                 <form method="POST" action="{{ route('clientes.update', ['cliente' => $cliente->id]) }}">
                                     @csrf
